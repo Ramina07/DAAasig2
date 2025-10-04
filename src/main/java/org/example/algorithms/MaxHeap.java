@@ -30,6 +30,11 @@ public class MaxHeap {
     // Извлечение максимального элемента из кучи
     public int extractMax() {
         if (size == 0) throw new NoSuchElementException("Heap is empty");
+        if (size == 1) { // Если в куче только один элемент
+            int max = heap[0];
+            size--;
+            return max;
+        }
         int max = heap[0];
         heap[0] = heap[size - 1];
         size--;
@@ -78,4 +83,5 @@ public class MaxHeap {
         }
     }
 }
+
 
