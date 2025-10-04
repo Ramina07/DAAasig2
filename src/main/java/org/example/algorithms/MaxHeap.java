@@ -13,11 +13,13 @@ public class MaxHeap {
         this.size = 0;
     }
 
+    // Метод для получения максимального элемента
     public int peekMax() {
         if (size == 0) throw new NoSuchElementException("Heap is empty");
         return heap[0];
     }
 
+    // Вставка нового элемента в кучу
     public void insert(int value) {
         if (size >= heap.length) resize();
         heap[size] = value;
@@ -25,6 +27,7 @@ public class MaxHeap {
         siftUp(size - 1);
     }
 
+    // Извлечение максимального элемента из кучи
     public int extractMax() {
         if (size == 0) throw new NoSuchElementException("Heap is empty");
         int max = heap[0];
@@ -34,6 +37,7 @@ public class MaxHeap {
         return max;
     }
 
+    // Метод для "поднимания" элемента
     private void siftUp(int index) {
         while (index > 0) {
             int parentIndex = (index - 1) / 2;
@@ -43,8 +47,9 @@ public class MaxHeap {
         }
     }
 
+    // Метод для "опускания" элемента
     private void siftDown(int index) {
-        while (true) {
+        while (index < size) {
             int left = 2 * index + 1;
             int right = 2 * index + 2;
             int largest = index;
@@ -58,14 +63,19 @@ public class MaxHeap {
         }
     }
 
+    // Метод для обмена элементов местами
     private void swap(int i, int j) {
         int temp = heap[i];
         heap[i] = heap[j];
         heap[j] = temp;
     }
 
+    // Метод для увеличения размера кучи
     private void resize() {
-        heap = Arrays.copyOf(heap, heap.length * 2);
+        // Увеличиваем размер массива только если куча заполнилась на 75% или больше
+        if (size >= heap.length * 0.75) {
+            heap = Arrays.copyOf(heap, heap.length * 2); // Удваиваем размер массива
+        }
     }
 }
 
